@@ -8,21 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */; };
-		D29E8D392C78E455000FBCEC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D382C78E455000FBCEC /* ContentView.swift */; };
 		D29E8D3B2C78E456000FBCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3A2C78E456000FBCEC /* Assets.xcassets */; };
 		D29E8D3E2C78E456000FBCEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */; };
 		D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D3F2C78E456000FBCEC /* Persistence.swift */; };
 		D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */; };
+		D29E8D4D2C78E5F3000FBCEC /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D4C2C78E5F3000FBCEC /* TodoEntity.swift */; };
+		D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D29E8D332C78E455000FBCEC /* ToDoViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViperApp.swift; sourceTree = "<group>"; };
-		D29E8D382C78E455000FBCEC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D29E8D3A2C78E456000FBCEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D29E8D3F2C78E456000FBCEC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D29E8D422C78E456000FBCEC /* ToDoViper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoViper.xcdatamodel; sourceTree = "<group>"; };
+		D29E8D4C2C78E5F3000FBCEC /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
+		D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +57,11 @@
 		D29E8D352C78E455000FBCEC /* ToDoViper */ = {
 			isa = PBXGroup;
 			children = (
+				D29E8D492C78E59F000FBCEC /* Data */,
+				D29E8D4F2C78E65F000FBCEC /* ViperModules */,
+				D29E8D4E2C78E627000FBCEC /* Resources */,
 				D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */,
-				D29E8D382C78E455000FBCEC /* ContentView.swift */,
-				D29E8D3A2C78E456000FBCEC /* Assets.xcassets */,
-				D29E8D3F2C78E456000FBCEC /* Persistence.swift */,
+				D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */,
 				D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */,
 				D29E8D3C2C78E456000FBCEC /* Preview Content */,
 			);
@@ -71,6 +74,158 @@
 				D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D29E8D492C78E59F000FBCEC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D4A2C78E5B2000FBCEC /* Network */,
+				D29E8D4B2C78E5BC000FBCEC /* Models */,
+				D29E8D3F2C78E456000FBCEC /* Persistence.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D29E8D4A2C78E5B2000FBCEC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		D29E8D4B2C78E5BC000FBCEC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D4C2C78E5F3000FBCEC /* TodoEntity.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D29E8D4E2C78E627000FBCEC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D3A2C78E456000FBCEC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D29E8D4F2C78E65F000FBCEC /* ViperModules */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D502C78E6B4000FBCEC /* ToDoList */,
+				D29E8D572C78E7B1000FBCEC /* ToDoDetail */,
+			);
+			path = ViperModules;
+			sourceTree = "<group>";
+		};
+		D29E8D502C78E6B4000FBCEC /* ToDoList */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D512C78E6B8000FBCEC /* View */,
+				D29E8D522C78E6CB000FBCEC /* Interactor */,
+				D29E8D532C78E6D4000FBCEC /* Presenter */,
+				D29E8D542C78E6E3000FBCEC /* Entity */,
+				D29E8D552C78E6EC000FBCEC /* Router */,
+				D29E8D562C78E755000FBCEC /* Assembly */,
+			);
+			path = ToDoList;
+			sourceTree = "<group>";
+		};
+		D29E8D512C78E6B8000FBCEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D29E8D522C78E6CB000FBCEC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D29E8D532C78E6D4000FBCEC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D29E8D542C78E6E3000FBCEC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		D29E8D552C78E6EC000FBCEC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D29E8D562C78E755000FBCEC /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		D29E8D572C78E7B1000FBCEC /* ToDoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D29E8D582C78E7C0000FBCEC /* View */,
+				D29E8D592C78E7C4000FBCEC /* Interactor */,
+				D29E8D5A2C78E7D2000FBCEC /* Presenter */,
+				D29E8D5C2C78E7E1000FBCEC /* Entity */,
+				D29E8D5B2C78E7DD000FBCEC /* Router */,
+				D29E8D5D2C78E805000FBCEC /* Assembly */,
+			);
+			path = ToDoDetail;
+			sourceTree = "<group>";
+		};
+		D29E8D582C78E7C0000FBCEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D29E8D592C78E7C4000FBCEC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D29E8D5A2C78E7D2000FBCEC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D29E8D5B2C78E7DD000FBCEC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D29E8D5C2C78E7E1000FBCEC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		D29E8D5D2C78E805000FBCEC /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +298,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29E8D4D2C78E5F3000FBCEC /* TodoEntity.swift in Sources */,
 				D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */,
-				D29E8D392C78E455000FBCEC /* ContentView.swift in Sources */,
 				D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */,
+				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
 				D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

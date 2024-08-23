@@ -1,4 +1,4 @@
-// ToDoViperApp.swift
+// PlaceholderView.swift
 // ToDoViper
 //
 // Created by Yury Lebedev on 23.08.24.
@@ -10,14 +10,15 @@
 
 import SwiftUI
 
-@main
-struct ToDoViperApp: App {
-    let persistenceController = PersistenceController.shared
-
-    var body: some Scene {
-        WindowGroup {
-            PlaceholderView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
+struct PlaceholderView: View {
+    
+    var body: some View {
+        Text("Welcome to ToDoViper!")
+            .padding()
     }
+    
+}
+
+#Preview {
+    PlaceholderView()
 }

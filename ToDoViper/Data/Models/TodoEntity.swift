@@ -1,4 +1,4 @@
-// ToDoViperApp.swift
+// TodoEntity.swift
 // ToDoViper
 //
 // Created by Yury Lebedev on 23.08.24.
@@ -8,16 +8,4 @@
 // Any use, reproduction, or distribution of this code without prior written
 // permission from the copyright owner is strictly prohibited.
 
-import SwiftUI
-
-@main
-struct ToDoViperApp: App {
-    let persistenceController = PersistenceController.shared
-
-    var body: some Scene {
-        WindowGroup {
-            PlaceholderView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-    }
-}
+import Foundation
