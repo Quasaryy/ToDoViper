@@ -15,6 +15,7 @@ protocol ToDoListInteractorInput {
     func fetchTodos()
     func deleteTodoById(_ id: Int64)
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
+    func addTodo(task: String, completed: Bool, createdAt: Date)
 }
 
 protocol ToDoListInteractorOutput: AnyObject {
@@ -26,9 +27,9 @@ final class ToDoListInteractor {
     
     weak var output: ToDoListInteractorOutput?
     private let persistenceController: PersistenceController
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkManagerProtocol
     
-    init(persistenceController: PersistenceController = .shared, networkManager: NetworkManager = NetworkManager()) {
+    init(persistenceController: PersistenceController = .shared, networkManager: NetworkManagerProtocol = NetworkManager()) {
         self.persistenceController = persistenceController
         self.networkManager = networkManager
     }
@@ -73,6 +74,12 @@ extension ToDoListInteractor: ToDoListInteractorInput {
     
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
         persistenceController.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
+        fetchTodos() // Reloading the task list after deletion
+    }
+    
+    func addTodo(task: String, completed: Bool, createdAt: Date) {
+        let newId = (persistenceController.fetchTodos().last?.id ?? 0) + 1
+        persistenceController.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
         fetchTodos() // Reloading the task list after deletion
     }
     

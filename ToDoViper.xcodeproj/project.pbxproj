@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D29D029D2C792290000DD149 /* ToDoListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */; };
+		D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */; };
 		D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */; };
 		D29E8D3B2C78E456000FBCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3A2C78E456000FBCEC /* Assets.xcassets */; };
 		D29E8D3E2C78E456000FBCEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractorTests.swift; sourceTree = "<group>"; };
+		D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		D29E8D332C78E455000FBCEC /* ToDoViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViperApp.swift; sourceTree = "<group>"; };
 		D29E8D3A2C78E456000FBCEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				D29E8D642C790246000FBCEC /* URLSessionProtocol.swift */,
+				D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */,
 				D29E8D662C79026A000FBCEC /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -266,6 +271,7 @@
 			children = (
 				D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */,
 				D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */,
+				D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */,
 			);
 			path = ToDoViperUnitTests;
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29E8D652C790246000FBCEC /* URLSessionProtocol.swift in Sources */,
+				D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */,
 				D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */,
 				D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */,
 				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
@@ -386,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29E8D762C790600000FBCEC /* NetworkManagerTests.swift in Sources */,
+				D29D029D2C792290000DD149 /* ToDoListInteractorTests.swift in Sources */,
 				D29E8D6F2C7905B0000FBCEC /* ToDoViperUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case noData
 }
 
-final class NetworkManager {
+final class NetworkManager: NetworkManagerProtocol {
     
     private let session: URLSessionProtocol
     private let urlString: String
