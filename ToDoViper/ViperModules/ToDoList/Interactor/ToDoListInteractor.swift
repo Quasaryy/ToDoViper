@@ -24,9 +24,11 @@ final class ToDoListInteractor {
     
     weak var output: ToDoListInteractorOutput?
     private let persistenceController: PersistenceController
+    private let networkManager: NetworkManager
     
-    init(persistenceController: PersistenceController = .shared) {
+    init(persistenceController: PersistenceController = .shared, networkManager: NetworkManager = NetworkManager()) {
         self.persistenceController = persistenceController
+        self.networkManager = networkManager
     }
     
 }
@@ -34,14 +36,31 @@ final class ToDoListInteractor {
 extension ToDoListInteractor: ToDoListInteractorInput {
     
     func fetchTodos() {
-        let context = persistenceController.container.viewContext
-        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        let todos = persistenceController.fetchTodos()
         
-        do {
-            let todos = try context.fetch(fetchRequest)
+        if todos.isEmpty {
+            // If there is no data in Core Data, load it from the network
+            networkManager.fetchTodos { [weak self] result in
+                switch result {
+                case .success(let todos):
+                    // Saving to Core Data
+                    self?.saveTodosToCoreData(todos)
+                    // Notifying Presenter of data receipt
+                    self?.output?.didFetchTodos(self?.persistenceController.fetchTodos() ?? [])
+                case .failure(let error):
+                    // Presenter error notification
+                    self?.output?.didFailToFetchTodos(with: error)
+                }
+            }
+        } else {
+            // If the data is in Core Data, pass it to Presenter
             output?.didFetchTodos(todos)
-        } catch {
-            output?.didFailToFetchTodos(with: error)
+        }
+    }
+    
+    private func saveTodosToCoreData(_ todos: [Todo]) {
+        for todo in todos {
+            persistenceController.saveTodo(id: Int64(todo.id), task: todo.todo, completed: todo.completed, createdAt: Date())
         }
     }
     
