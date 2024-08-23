@@ -81,4 +81,57 @@ struct PersistenceController {
         }
     }
     
+    func fetchTodos() -> [TodoEntity] {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        
+        do {
+            let todos = try context.fetch(fetchRequest)
+            return todos
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
+        
+        do {
+            let todos = try context.fetch(fetchRequest)
+            if let todo = todos.first {
+                todo.todo = task
+                todo.completed = completed
+                todo.createdAt = createdAt
+                try context.save()
+            } else {
+                print("Todo with id \(id) not found.")
+            }
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func deleteTodo(id: Int64) {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
+        
+        do {
+            let todos = try context.fetch(fetchRequest)
+            if let todo = todos.first {
+                context.delete(todo)
+                try context.save()
+            } else {
+                print("Todo with id \(id) not found.")
+            }
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
 }
