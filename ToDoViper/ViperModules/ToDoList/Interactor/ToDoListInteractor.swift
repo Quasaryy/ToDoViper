@@ -13,6 +13,8 @@ import CoreData
 
 protocol ToDoListInteractorInput {
     func fetchTodos()
+    func deleteTodoById(_ id: Int64)
+    func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
 }
 
 protocol ToDoListInteractorOutput: AnyObject {
@@ -62,6 +64,16 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         for todo in todos {
             persistenceController.saveTodo(id: Int64(todo.id), task: todo.todo, completed: todo.completed, createdAt: Date())
         }
+    }
+    
+    func deleteTodoById(_ id: Int64) {
+        persistenceController.deleteTodo(id: id)
+        fetchTodos() // Reloading the task list after deletion
+    }
+    
+    func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
+        persistenceController.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
+        fetchTodos() // Reloading the task list after deletion
     }
     
 }
