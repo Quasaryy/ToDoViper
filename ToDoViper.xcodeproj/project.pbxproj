@@ -14,6 +14,7 @@
 		D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */; };
 		D29E8D4D2C78E5F3000FBCEC /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D4C2C78E5F3000FBCEC /* TodoEntity.swift */; };
 		D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */; };
+		D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D29E8D422C78E456000FBCEC /* ToDoViper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoViper.xcdatamodel; sourceTree = "<group>"; };
 		D29E8D4C2C78E5F3000FBCEC /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
 		D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 		D29E8D522C78E6CB000FBCEC /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */,
 				D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */,
 				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
+				D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */,
 				D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
