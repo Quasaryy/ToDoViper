@@ -48,4 +48,20 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    func saveTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
+        let context = container.viewContext
+        let newTodo = TodoEntity(context: context)
+        newTodo.id = id
+        newTodo.todo = task
+        newTodo.completed = completed
+        newTodo.createdAt = createdAt
+        
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
 }
