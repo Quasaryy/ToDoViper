@@ -15,21 +15,38 @@ struct PersistenceController {
     static let shared = PersistenceController()
     
     static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
+        let result = PersistenceController(inMemory: false)
         let viewContext = result.container.viewContext
-        for i in 0..<10 {
-            let newTodo = TodoEntity(context: viewContext)
-            newTodo.id = Int64(i)
-            newTodo.todo = "Sample Task \(i)"
-            newTodo.completed = false
-            newTodo.createdAt = Date()
-        }
+        
+        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        fetchRequest.fetchLimit = 5
+        
         do {
-            try viewContext.save()
+            let todos = try viewContext.fetch(fetchRequest)
+            if todos.isEmpty {
+                // If there is no data
+                let sampleTasks = [
+                    (id: 1, todo: "Sample Task 1", completed: false),
+                    (id: 2, todo: "Sample Task 2", completed: true),
+                    (id: 3, todo: "Sample Task 3", completed: false),
+                    (id: 4, todo: "Sample Task 4", completed: true),
+                    (id: 5, todo: "Sample Task 5", completed: false)
+                ]
+                
+                for task in sampleTasks {
+                    let newTodo = TodoEntity(context: viewContext)
+                    newTodo.id = Int64(task.id)
+                    newTodo.todo = task.todo
+                    newTodo.completed = task.completed
+                    newTodo.createdAt = Date()
+                }
+                try viewContext.save()
+            }
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+        
         return result
     }()
     
