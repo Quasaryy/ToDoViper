@@ -1,4 +1,4 @@
-// TodoModels.swift
+// URLSessionProtocol.swift
 // ToDoViper
 //
 // Created by Yury Lebedev on 23.08.24.
@@ -10,12 +10,8 @@
 
 import Foundation
 
-struct TodoResponse: Decodable {
-    let todos: [Todo]
+protocol URLSessionProtocol {
+    func dataTask(with url: URL, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
-struct Todo: Decodable {
-    let id: Int
-    let todo: String
-    let completed: Bool
-}
+extension URLSession: URLSessionProtocol {}
