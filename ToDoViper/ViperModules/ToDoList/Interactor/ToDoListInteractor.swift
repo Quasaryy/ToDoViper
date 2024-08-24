@@ -88,7 +88,7 @@ extension ToDoListInteractor: ToDoListInteractorInput {
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
         DispatchQueue.global(qos: .background).async {
             self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
-            self.fetchTodos() // Reloading the task list after deletion
+            self.fetchTodos() // Reloading the task list after updating
         }
     }
     
@@ -96,7 +96,7 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         DispatchQueue.global(qos: .background).async {
             let newId = (self.dataStore.fetchTodos().last?.id ?? 0) + 1
             self.dataStore.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
-            self.fetchTodos() // Reloading the task list after deletion
+            self.fetchTodos() // Reloading the task list after adding
         }
     }
     

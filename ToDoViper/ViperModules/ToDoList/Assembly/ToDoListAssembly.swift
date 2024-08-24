@@ -23,3 +23,9 @@ struct ToDoListAssembly {
     }
     
 }
+
+#if DEBUG
+#Preview {
+    ToDoListAssembly.assemble()
+}
+#endif

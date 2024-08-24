@@ -43,8 +43,16 @@ final class ToDoListPresenter: ObservableObject {
     }
     
     func didTapTodoItem(_ id: Int64) {
-        // Logic here later when the router is ready
+        if let todo = todos.first(where: { $0.id == id }) {
+            let newStatus = !todo.completed
+            interactor.updateTodoById(id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
+        }
     }
+    
+    func deleteTodoById(_ id: Int64) {
+        interactor.deleteTodoById(id)
+    }
+    
 }
 
 extension ToDoListPresenter: ToDoListInteractorOutput {

@@ -41,6 +41,7 @@ struct ToDoListView: View {
                         presenter.didTapTodoItem(todo.id)
                     }
                 }
+                .onDelete(perform: deleteTask)
             }
             .navigationTitle("To-Do List")
             .navigationBarItems(trailing: Button(action: {
@@ -57,6 +58,13 @@ struct ToDoListView: View {
         }
         .onReceive(presenter.$errorMessage) { error in
             isShowingError = error != nil
+        }
+    }
+    
+    private func deleteTask(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let todo = presenter.todos[index]
+            presenter.deleteTodoById(todo.id)
         }
     }
     

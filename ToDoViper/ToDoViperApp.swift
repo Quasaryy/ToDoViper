@@ -12,7 +12,6 @@ import SwiftUI
 
 @main
 struct ToDoViperApp: App {
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
@@ -21,6 +20,8 @@ struct ToDoViperApp: App {
     }
 }
 
+#if DEBUG
 #Preview {
     ToDoListAssembly.assemble()
 }
+#endif
