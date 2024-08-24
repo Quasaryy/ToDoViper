@@ -59,7 +59,7 @@ extension ToDoListInteractor: ToDoListInteractorInput {
             case .success(let todos):
                 DispatchQueue.global(qos: .background).async {
                     self?.saveTodosToCoreData(todos)
-                    let savedTodos = self?.dataStore.fetchTodos() ?? []
+                    let savedTodos = self?.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() } ?? []
                     DispatchQueue.main.async {
                         self?.output?.didFetchTodos(savedTodos)
                     }
