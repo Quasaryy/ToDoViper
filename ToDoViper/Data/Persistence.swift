@@ -8,6 +8,13 @@
 // Any use, reproduction, or distribution of this code without prior written
 // permission from the copyright owner is strictly prohibited.
 
+protocol TodoDataStore {
+    func saveTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
+    func fetchTodos() -> [TodoEntity]
+    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
+    func deleteTodo(id: Int64)
+}
+
 import CoreData
 
 struct PersistenceController {
@@ -65,6 +72,9 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+}
+
+extension PersistenceController: TodoDataStore {
     func saveTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
         let context = container.viewContext
         let newTodo = TodoEntity(context: context)

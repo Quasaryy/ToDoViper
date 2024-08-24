@@ -27,11 +27,11 @@ protocol ToDoListInteractorOutput: AnyObject {
 final class ToDoListInteractor {
     
     weak var output: ToDoListInteractorOutput?
-    private let persistenceController: PersistenceController
+    private let dataStore: TodoDataStore
     private let networkManager: NetworkManagerProtocol
     
-    init(persistenceController: PersistenceController = .shared, networkManager: NetworkManagerProtocol = NetworkManager()) {
-        self.persistenceController = persistenceController
+    init(dataStore: TodoDataStore = PersistenceController.shared, networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.dataStore = dataStore
         self.networkManager = networkManager
     }
     
@@ -40,48 +40,64 @@ final class ToDoListInteractor {
 extension ToDoListInteractor: ToDoListInteractorInput {
     
     func fetchTodos() {
-        let todos = persistenceController.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
-        
-        if todos.isEmpty {
-            // If there is no data in Core Data, load it from the network
-            networkManager.fetchTodos { [weak self] result in
-                switch result {
-                case .success(let todos):
-                    // Saving to Core Data
+        DispatchQueue.global(qos: .background).async {
+            let todos = self.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
+            
+            DispatchQueue.main.async {
+                if todos.isEmpty {
+                    self.loadTodosFromNetwork()
+                } else {
+                    self.output?.didFetchTodos(todos)
+                }
+            }
+        }
+    }
+    
+    private func loadTodosFromNetwork() {
+        networkManager.fetchTodos { [weak self] result in
+            switch result {
+            case .success(let todos):
+                DispatchQueue.global(qos: .background).async {
                     self?.saveTodosToCoreData(todos)
-                    // Notifying Presenter of data receipt
-                    self?.output?.didFetchTodos(self?.persistenceController.fetchTodos() ?? [])
-                case .failure(let error):
-                    // Presenter error notification
+                    let savedTodos = self?.dataStore.fetchTodos() ?? []
+                    DispatchQueue.main.async {
+                        self?.output?.didFetchTodos(savedTodos)
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
                     self?.output?.didFailToFetchTodos(with: error)
                 }
             }
-        } else {
-            // If the data is in Core Data, pass it to Presenter
-            output?.didFetchTodos(todos)
         }
     }
     
     private func saveTodosToCoreData(_ todos: [Todo]) {
         for todo in todos {
-            persistenceController.saveTodo(id: Int64(todo.id), task: todo.todo, completed: todo.completed, createdAt: Date())
+            dataStore.saveTodo(id: Int64(todo.id), task: todo.todo, completed: todo.completed, createdAt: Date())
         }
     }
     
     func deleteTodoById(_ id: Int64) {
-        persistenceController.deleteTodo(id: id)
-        fetchTodos() // Reloading the task list after deletion
+        DispatchQueue.global(qos: .background).async {
+            self.dataStore.deleteTodo(id: id)
+            self.fetchTodos() // Reloading the task list after deletion
+        }
     }
     
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
-        persistenceController.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
-        fetchTodos() // Reloading the task list after deletion
+        DispatchQueue.global(qos: .background).async {
+            self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
+            self.fetchTodos() // Reloading the task list after deletion
+        }
     }
     
     func addTodo(task: String, completed: Bool, createdAt: Date) {
-        let newId = (persistenceController.fetchTodos().last?.id ?? 0) + 1
-        persistenceController.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
-        fetchTodos() // Reloading the task list after deletion
+        DispatchQueue.global(qos: .background).async {
+            let newId = (self.dataStore.fetchTodos().last?.id ?? 0) + 1
+            self.dataStore.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
+            self.fetchTodos() // Reloading the task list after deletion
+        }
     }
     
     func createNewTodo() {
