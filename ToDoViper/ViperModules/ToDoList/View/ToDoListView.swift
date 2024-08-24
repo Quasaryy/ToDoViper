@@ -23,13 +23,18 @@ struct ToDoListView: View {
                         HStack {
                             Text(todo.todo ?? "Unnamed Task")
                             Spacer()
-                            if todo.completed {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
-                            } else {
-                                Image(systemName: "circle")
-                                    .foregroundColor(.red)
+                            Button(action: {
+                                presenter.didTapStatusIcon(todo.id)
+                            }) {
+                                if todo.completed {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.green)
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundColor(.red)
+                                }
                             }
+                            .buttonStyle(PlainButtonStyle()) // Для удаления эффекта кнопки
                         }
                         if let createdAt = todo.createdAt {
                             Text("Created at: \(formattedDate(createdAt))")

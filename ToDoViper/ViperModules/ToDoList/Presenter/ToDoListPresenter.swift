@@ -43,10 +43,11 @@ final class ToDoListPresenter: ObservableObject {
     }
     
     func didTapTodoItem(_ id: Int64) {
-        if let todo = todos.first(where: { $0.id == id }) {
-            let newStatus = !todo.completed
-            interactor.updateTodoById(id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
-        }
+        print("tapped")
+    }
+    
+    func didTapStatusIcon(_ id: Int64) {
+        interactor.toggleTodoStatus(by: id)
     }
     
     func deleteTodoById(_ id: Int64) {

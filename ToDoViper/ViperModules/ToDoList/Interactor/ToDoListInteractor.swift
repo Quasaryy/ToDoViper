@@ -17,6 +17,7 @@ protocol ToDoListInteractorInput {
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
     func addTodo(task: String, completed: Bool, createdAt: Date)
     func createNewTodo()
+    func toggleTodoStatus(by id: Int64)
 }
 
 protocol ToDoListInteractorOutput: AnyObject {
@@ -89,6 +90,16 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         DispatchQueue.global(qos: .background).async {
             self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
             self.fetchTodos() // Reloading the task list after updating
+        }
+    }
+    
+    func toggleTodoStatus(by id: Int64) {
+        DispatchQueue.global(qos: .background).async {
+            if let todo = self.dataStore.fetchTodos().first(where: { $0.id == id }) {
+                let newStatus = !todo.completed
+                self.dataStore.updateTodo(id: id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
+                self.fetchTodos() // Reloading the task list after updating
+            }
         }
     }
     
