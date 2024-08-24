@@ -16,6 +16,7 @@ protocol ToDoListInteractorInput {
     func deleteTodoById(_ id: Int64)
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
     func addTodo(task: String, completed: Bool, createdAt: Date)
+    func createNewTodo()
 }
 
 protocol ToDoListInteractorOutput: AnyObject {
@@ -39,7 +40,7 @@ final class ToDoListInteractor {
 extension ToDoListInteractor: ToDoListInteractorInput {
     
     func fetchTodos() {
-        let todos = persistenceController.fetchTodos()
+        let todos = persistenceController.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
         
         if todos.isEmpty {
             // If there is no data in Core Data, load it from the network
@@ -81,6 +82,14 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         let newId = (persistenceController.fetchTodos().last?.id ?? 0) + 1
         persistenceController.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
         fetchTodos() // Reloading the task list after deletion
+    }
+    
+    func createNewTodo() {
+        let newTask = "New Task"
+        let completed = false
+        let createdAt = Date()
+        
+        addTodo(task: newTask, completed: completed, createdAt: createdAt)
     }
     
 }

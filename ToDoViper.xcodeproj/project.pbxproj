@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D215A8DD2C79443B00525A07 /* ToDoViper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D215A8DB2C79443B00525A07 /* ToDoViper.xcdatamodeld */; };
+		D21CDD4C2C79659D00AE3A7F /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */; };
+		D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */; };
+		D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */; };
 		D29D029D2C792290000DD149 /* ToDoListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */; };
 		D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */; };
 		D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */; };
 		D29E8D3B2C78E456000FBCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3A2C78E456000FBCEC /* Assets.xcassets */; };
 		D29E8D3E2C78E456000FBCEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */; };
 		D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D3F2C78E456000FBCEC /* Persistence.swift */; };
-		D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */; };
 		D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */; };
 		D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */; };
 		D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D622C78F97E000FBCEC /* TodoModels.swift */; };
@@ -34,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D215A8DC2C79443B00525A07 /* ToDoViper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoViper.xcdatamodel; sourceTree = "<group>"; };
+		D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
+		D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
+		D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListAssembly.swift; sourceTree = "<group>"; };
 		D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractorTests.swift; sourceTree = "<group>"; };
 		D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		D29E8D332C78E455000FBCEC /* ToDoViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +48,6 @@
 		D29E8D3A2C78E456000FBCEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D29E8D3F2C78E456000FBCEC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		D29E8D422C78E456000FBCEC /* ToDoViper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoViper.xcdatamodel; sourceTree = "<group>"; };
 		D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 		D29E8D622C78F97E000FBCEC /* TodoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModels.swift; sourceTree = "<group>"; };
@@ -95,8 +101,8 @@
 				D29E8D4F2C78E65F000FBCEC /* ViperModules */,
 				D29E8D4E2C78E627000FBCEC /* Resources */,
 				D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */,
+				D215A8DB2C79443B00525A07 /* ToDoViper.xcdatamodeld */,
 				D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */,
-				D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */,
 				D29E8D3C2C78E456000FBCEC /* Preview Content */,
 			);
 			path = ToDoViper;
@@ -113,9 +119,9 @@
 		D29E8D492C78E59F000FBCEC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				D29E8D3F2C78E456000FBCEC /* Persistence.swift */,
 				D29E8D4A2C78E5B2000FBCEC /* Network */,
 				D29E8D4B2C78E5BC000FBCEC /* Models */,
-				D29E8D3F2C78E456000FBCEC /* Persistence.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -171,6 +177,7 @@
 		D29E8D512C78E6B8000FBCEC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +193,7 @@
 		D29E8D532C78E6D4000FBCEC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 		D29E8D562C78E755000FBCEC /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
+				D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -379,11 +388,14 @@
 				D29E8D652C790246000FBCEC /* URLSessionProtocol.swift in Sources */,
 				D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */,
 				D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */,
-				D29E8D432C78E456000FBCEC /* ToDoViper.xcdatamodeld in Sources */,
+				D215A8DD2C79443B00525A07 /* ToDoViper.xcdatamodeld in Sources */,
 				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
 				D29E8D672C79026A000FBCEC /* NetworkManager.swift in Sources */,
 				D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */,
+				D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */,
+				D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */,
 				D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */,
+				D21CDD4C2C79659D00AE3A7F /* ToDoListPresenter.swift in Sources */,
 				D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,13 +667,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D29E8D412C78E456000FBCEC /* ToDoViper.xcdatamodeld */ = {
+		D215A8DB2C79443B00525A07 /* ToDoViper.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D29E8D422C78E456000FBCEC /* ToDoViper.xcdatamodel */,
+				D215A8DC2C79443B00525A07 /* ToDoViper.xcdatamodel */,
 			);
-			currentVersion = D29E8D422C78E456000FBCEC /* ToDoViper.xcdatamodel */;
-			path = ToDoViper.xcdatamodeld;
+			currentVersion = D215A8DC2C79443B00525A07 /* ToDoViper.xcdatamodel */;
+			name = ToDoViper.xcdatamodeld;
+			path = "/Users/yury/Developer/Xcode/Effective Mobile/ToDoViper/ToDoViper/ToDoViper.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

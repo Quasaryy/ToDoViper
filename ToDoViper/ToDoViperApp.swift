@@ -16,8 +16,11 @@ struct ToDoViperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            PlaceholderView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ToDoListAssembly.assemble()
         }
     }
+}
+
+#Preview {
+    ToDoListAssembly.assemble()
 }
