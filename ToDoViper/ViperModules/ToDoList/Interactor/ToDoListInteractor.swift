@@ -27,56 +27,64 @@ protocol ToDoListInteractorOutput: AnyObject {
 
 final class ToDoListInteractor {
     
+    // MARK: - Properties
+    
     weak var output: ToDoListInteractorOutput?
     private let dataStore: TodoDataStore
     private let networkManager: NetworkManagerProtocol
+    
+    // MARK: - Initialization
     
     init(dataStore: TodoDataStore = PersistenceController.shared, networkManager: NetworkManagerProtocol = NetworkManager()) {
         self.dataStore = dataStore
         self.networkManager = networkManager
     }
     
+    // MARK: - Private Methods
+    
     private func sortTodos(_ todos: [TodoEntity]) -> [TodoEntity] {
-            return todos.sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
-        }
-    
-}
-
-extension ToDoListInteractor: ToDoListInteractorInput {
-    
-    func fetchTodos() {
-            let todos = self.dataStore.fetchTodos()
-            let sortedTodos = sortTodos(todos)
-            
-            if sortedTodos.isEmpty {
-                self.loadTodosFromNetwork()
-            } else {
-                self.output?.didFetchTodos(sortedTodos)
-            }
-        }
+        return todos.sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
+    }
     
     private func loadTodosFromNetwork() {
-            networkManager.fetchTodos { [weak self] result in
-                switch result {
-                case .success(let todos):
-                    DispatchQueue.global(qos: .background).async {
-                        self?.saveTodosToCoreData(todos)
-                        let savedTodos = self?.sortTodos(self?.dataStore.fetchTodos() ?? [])
-                        DispatchQueue.main.async {
-                            self?.output?.didFetchTodos(savedTodos ?? [])
-                        }
-                    }
-                case .failure(let error):
+        networkManager.fetchTodos { [weak self] result in
+            switch result {
+            case .success(let todos):
+                DispatchQueue.global(qos: .background).async {
+                    self?.saveTodosToCoreData(todos)
+                    let savedTodos = self?.sortTodos(self?.dataStore.fetchTodos() ?? [])
                     DispatchQueue.main.async {
-                        self?.output?.didFailToFetchTodos(with: error)
+                        self?.output?.didFetchTodos(savedTodos ?? [])
                     }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.output?.didFailToFetchTodos(with: error)
                 }
             }
         }
+    }
     
     private func saveTodosToCoreData(_ todos: [Todo]) {
         for todo in todos {
             dataStore.saveTodo(id: Int64(todo.id), task: todo.todo, completed: todo.completed, createdAt: Date())
+        }
+    }
+    
+}
+
+// MARK: - ToDoListInteractorInput
+
+extension ToDoListInteractor: ToDoListInteractorInput {
+    
+    func fetchTodos() {
+        let todos = self.dataStore.fetchTodos()
+        let sortedTodos = sortTodos(todos)
+        
+        if sortedTodos.isEmpty {
+            self.loadTodosFromNetwork()
+        } else {
+            self.output?.didFetchTodos(sortedTodos)
         }
     }
     
@@ -107,7 +115,6 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         let newTask = "New Task"
         let completed = false
         let createdAt = Date()
-        
         addTodo(task: newTask, completed: completed, createdAt: createdAt)
     }
     
