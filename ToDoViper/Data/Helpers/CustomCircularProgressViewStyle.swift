@@ -12,10 +12,14 @@ import SwiftUI
 
 struct CustomCircularProgressViewStyle: ProgressViewStyle {
     
+    // MARK: - Properties
+    
     var lineWidth: CGFloat = 20.0
     var size: CGFloat = 100.0
     var color: Color = .blue
     @State private var isAnimating: Bool = false
+    
+    // MARK: - UI
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
@@ -38,15 +42,9 @@ struct CustomCircularProgressViewStyle: ProgressViewStyle {
     
 }
 
-struct ProgressViewPreview: View {
-    
-    var body: some View {
-        ProgressView()
-            .progressViewStyle(CustomCircularProgressViewStyle())
-    }
-    
-}
-
+#if DEBUG
 #Preview {
-    ProgressViewPreview()
+    ProgressView()
+        .progressViewStyle(CustomCircularProgressViewStyle())
 }
+#endif

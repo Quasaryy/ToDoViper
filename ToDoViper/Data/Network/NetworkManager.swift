@@ -24,7 +24,7 @@ final class NetworkManager {
     
     // MARK: - Initialization
     
-    init(session: URLSessionProtocol = URLSession.shared, urlString: String = "https://dummyjson.com/todos") {
+    init(session: URLSessionProtocol = URLSession.shared, urlString: String = "https://run.mocky.io/v3/08f4885d-0c77-4468-aefe-559c5ea23685") {
         self.session = session
         self.urlString = urlString
     }
