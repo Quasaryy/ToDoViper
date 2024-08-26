@@ -26,6 +26,7 @@ final class ToDoListPresenter: ObservableObject {
     
     @Published var todos: [TodoEntity] = []
     @Published var errorMessage: String?
+    @Published var isLoading: Bool = false
     
     private let interactor: ToDoListInteractorInput
     weak var view: ToDoListViewInput?
@@ -35,6 +36,7 @@ final class ToDoListPresenter: ObservableObject {
     }
     
     func loadTodos() {
+        isLoading = true
         interactor.fetchTodos()
     }
     
@@ -60,12 +62,14 @@ extension ToDoListPresenter: ToDoListInteractorOutput {
     
     func didFetchTodos(_ todos: [TodoEntity]) {
         DispatchQueue.main.async {
+            self.isLoading = false
             self.todos = todos
         }
     }
     
     func didFailToFetchTodos(with error: Error) {
         DispatchQueue.main.async {
+            self.isLoading = false
             self.errorMessage = error.localizedDescription
         }
     }

@@ -71,7 +71,7 @@ class PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
-
+        
     }
     
     func performBackgroundTaskSync(_ block: @escaping (NSManagedObjectContext) -> Void) {
@@ -81,7 +81,6 @@ class PersistenceController {
             do {
                 try backgroundContext.save()
                 
-                // Синхронизация изменений с основным контекстом
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .NSManagedObjectContextDidSave, object: backgroundContext)
                 }
@@ -120,16 +119,25 @@ extension PersistenceController: TodoDataStore {
     }
     
     func addTodo(task: String, completed: Bool, createdAt: Date) {
-            performBackgroundTaskSync { context in
-                // Определяем новый ID как наибольший существующий ID + 1
-                let newId: Int64 = (self.fetchTodos().last?.id ?? 0) + 1
+        performBackgroundTaskSync { context in
+            let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+            fetchRequest.fetchLimit = 1
+            
+            do {
+                let lastTodo = try context.fetch(fetchRequest).first
+                let newId: Int64 = (lastTodo?.id ?? 0) + 1
                 let newTodo = TodoEntity(context: context)
                 newTodo.id = newId
                 newTodo.todo = task
                 newTodo.completed = completed
                 newTodo.createdAt = createdAt
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+    }
     
     func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
         performBackgroundTaskSync { context in

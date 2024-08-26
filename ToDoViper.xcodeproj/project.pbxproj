@@ -11,6 +11,7 @@
 		D21CDD4C2C79659D00AE3A7F /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */; };
 		D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */; };
 		D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */; };
+		D299CBC22C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D299CBC12C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift */; };
 		D29D029D2C792290000DD149 /* ToDoListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */; };
 		D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */; };
 		D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */; };
@@ -41,6 +42,7 @@
 		D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
 		D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
 		D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListAssembly.swift; sourceTree = "<group>"; };
+		D299CBC12C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircularProgressViewStyle.swift; sourceTree = "<group>"; };
 		D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractorTests.swift; sourceTree = "<group>"; };
 		D29D029E2C7923D0000DD149 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		D29E8D332C78E455000FBCEC /* ToDoViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D299CBC02C7CC6EA009FAFC6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D299CBC12C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		D29E8D2A2C78E455000FBCEC = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				D29E8D3F2C78E456000FBCEC /* Persistence.swift */,
+				D299CBC02C7CC6EA009FAFC6 /* Helpers */,
 				D29E8D4A2C78E5B2000FBCEC /* Network */,
 				D29E8D4B2C78E5BC000FBCEC /* Models */,
 			);
@@ -392,6 +403,7 @@
 				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
 				D29E8D672C79026A000FBCEC /* NetworkManager.swift in Sources */,
 				D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */,
+				D299CBC22C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift in Sources */,
 				D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */,
 				D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */,
 				D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */,

@@ -17,49 +17,56 @@ struct ToDoListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(presenter.todos) { todo in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(todo.todo ?? "Unnamed Task")
-                            Spacer()
-                            Button(action: {
-                                presenter.didTapStatusIcon(todo.id)
-                            }) {
-                                if todo.completed {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundColor(.green)
-                                } else {
-                                    Image(systemName: "circle")
-                                        .foregroundColor(.red)
+            if presenter.isLoading {
+                ProgressView()
+                    .progressViewStyle(CustomCircularProgressViewStyle())
+            } else {
+                List {
+                    ForEach(presenter.todos) { todo in
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(todo.todo ?? "Unnamed Task")
+                                Spacer()
+                                Button(action: {
+                                    presenter.didTapStatusIcon(todo.id)
+                                }) {
+                                    if todo.completed {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                    } else {
+                                        Image(systemName: "circle")
+                                            .foregroundColor(.red)
+                                    }
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .buttonStyle(PlainButtonStyle())
+                            if let createdAt = todo.createdAt {
+                                Text("Created at: \(formattedDate(createdAt))")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                            }
                         }
-                        if let createdAt = todo.createdAt {
-                            Text("Created at: \(formattedDate(createdAt))")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
+                        .onTapGesture {
+                            presenter.didTapTodoItem(todo.id)
                         }
                     }
-                    .onTapGesture {
-                        presenter.didTapTodoItem(todo.id)
-                    }
+                    .onDelete(perform: deleteTask)
                 }
-                .onDelete(perform: deleteTask)
+                .navigationTitle("To-Do List")
+                .navigationBarItems(trailing: Button(action: {
+                    presenter.didTapAddTodoButton()
+                }) {
+                    Image(systemName: "plus")
+                })
             }
-            .navigationTitle("To-Do List")
-            .navigationBarItems(trailing: Button(action: {
-                presenter.didTapAddTodoButton()
-            }) {
-                Image(systemName: "plus")
-            })
-            .onAppear {
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 presenter.loadTodos()
             }
-            .alert(isPresented: $isShowingError) {
-                Alert(title: Text("Error"), message: Text(presenter.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
-            }
+        }
+        .alert(isPresented: $isShowingError) {
+            Alert(title: Text("Error"), message: Text(presenter.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
         }
         .onReceive(presenter.$errorMessage) { error in
             isShowingError = error != nil
