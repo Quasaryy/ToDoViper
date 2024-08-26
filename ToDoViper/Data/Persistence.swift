@@ -20,7 +20,10 @@ import CoreData
 
 class PersistenceController {
     
+    // MARK: - Properties
+    
     static let shared = PersistenceController()
+    let container: NSPersistentContainer
     
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: false)
@@ -31,25 +34,25 @@ class PersistenceController {
         
         do {
             let todos = try viewContext.fetch(fetchRequest)
-            if todos.isEmpty {
-                // If there is no data
-                let sampleTasks = [
-                    (id: 1, todo: "Sample Task 1", completed: false),
-                    (id: 2, todo: "Sample Task 2", completed: true),
-                    (id: 3, todo: "Sample Task 3", completed: false),
-                    (id: 4, todo: "Sample Task 4", completed: true),
-                    (id: 5, todo: "Sample Task 5", completed: false)
-                ]
-                
-                for task in sampleTasks {
-                    let newTodo = TodoEntity(context: viewContext)
-                    newTodo.id = Int64(task.id)
-                    newTodo.todo = task.todo
-                    newTodo.completed = task.completed
-                    newTodo.createdAt = Date()
-                }
-                try viewContext.save()
-            }
+//            if todos.isEmpty {
+//                // If there is no data
+//                let sampleTasks = [
+//                    (id: 1, todo: "Sample Task 1", completed: false),
+//                    (id: 2, todo: "Sample Task 2", completed: true),
+//                    (id: 3, todo: "Sample Task 3", completed: false),
+//                    (id: 4, todo: "Sample Task 4", completed: true),
+//                    (id: 5, todo: "Sample Task 5", completed: false)
+//                ]
+//
+//                for task in sampleTasks {
+//                    let newTodo = TodoEntity(context: viewContext)
+//                    newTodo.id = Int64(task.id)
+//                    newTodo.todo = task.todo
+//                    newTodo.completed = task.completed
+//                    newTodo.createdAt = Date()
+//                }
+//                try viewContext.save()
+//            }
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
@@ -58,7 +61,7 @@ class PersistenceController {
         return result
     }()
     
-    let container: NSPersistentContainer
+    // MARK: - Initialization
     
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "ToDoViper")
@@ -74,7 +77,9 @@ class PersistenceController {
         
     }
     
-    func performBackgroundTaskSync(_ block: @escaping (NSManagedObjectContext) -> Void) {
+    // MARK: - Private Methods
+    
+    private func performBackgroundTaskSync(_ block: @escaping (NSManagedObjectContext) -> Void) {
         let backgroundContext = container.newBackgroundContext()
         backgroundContext.performAndWait {
             block(backgroundContext)
@@ -92,6 +97,8 @@ class PersistenceController {
     }
     
 }
+
+// MARK: - TodoDataStore
 
 extension PersistenceController: TodoDataStore {
     

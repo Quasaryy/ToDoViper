@@ -31,7 +31,7 @@ final class NetworkManager: NetworkManagerProtocol {
             return
         }
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let task = self.session.dataTask(with: url) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
