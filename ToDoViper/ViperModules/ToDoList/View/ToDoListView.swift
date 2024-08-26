@@ -12,6 +12,8 @@ import SwiftUI
 
 struct ToDoListView: View {
     
+    // MARK: - Properties
+    
     @ObservedObject var presenter: ToDoListPresenter
     @State private var isShowingError: Bool = false
     @State private var isShowingAddEditTodoSheet: Bool = false
@@ -21,7 +23,13 @@ struct ToDoListView: View {
     @State private var isTaskCompleted: Bool = false
     @State private var originalCreatedAt: Date? = nil
     
+    // MARK: - UI
+    
     var body: some View {
+        makeUI()
+    }
+    
+    private func makeUI() -> some View {
         NavigationView {
             if presenter.isLoading {
                 ProgressView()
@@ -84,8 +92,8 @@ struct ToDoListView: View {
         .alert(isPresented: $isShowingError) {
             Alert(title: Text("Error"), message: Text(presenter.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
         }
-        .onChange(of: isShowingAddEditTodoSheet) { showing in
-            if showing {
+        .onChange(of: isShowingAddEditTodoSheet) { previousValue, currentValue in
+            if currentValue {
                 if isEditing, let id = editingTodoId {
                     newTaskText = presenter.todos.first(where: { $0.id == id })?.todo ?? ""
                     isTaskCompleted = presenter.todos.first(where: { $0.id == id })?.completed ?? false
@@ -115,6 +123,8 @@ struct ToDoListView: View {
         }
     }
     
+    // MARK: - Private Methods
+    
     private func deleteTask(at offsets: IndexSet) {
         offsets.forEach { index in
             let todo = presenter.todos[index]
@@ -130,3 +140,16 @@ struct ToDoListView: View {
     }
     
 }
+
+#if DEBUG
+#Preview {
+    let persistenceController = PersistenceController.preview
+    let interactor = ToDoListInteractor(
+        dataStore: persistenceController,
+        networkManager: NetworkManager()
+    )
+    let presenter = ToDoListPresenter(interactor: interactor)
+    interactor.output = presenter
+    return ToDoListView(presenter: presenter)
+}
+#endif
