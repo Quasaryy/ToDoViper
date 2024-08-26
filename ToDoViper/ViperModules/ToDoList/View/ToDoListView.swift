@@ -34,7 +34,7 @@ struct ToDoListView: View {
                                         .foregroundColor(.red)
                                 }
                             }
-                            .buttonStyle(PlainButtonStyle()) // Для удаления эффекта кнопки
+                            .buttonStyle(PlainButtonStyle())
                         }
                         if let createdAt = todo.createdAt {
                             Text("Created at: \(formattedDate(createdAt))")

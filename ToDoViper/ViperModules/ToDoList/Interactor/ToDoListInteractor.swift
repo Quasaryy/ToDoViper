@@ -41,16 +41,12 @@ final class ToDoListInteractor {
 extension ToDoListInteractor: ToDoListInteractorInput {
     
     func fetchTodos() {
-        DispatchQueue.global(qos: .background).async {
-            let todos = self.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
-            
-            DispatchQueue.main.async {
-                if todos.isEmpty {
-                    self.loadTodosFromNetwork()
-                } else {
-                    self.output?.didFetchTodos(todos)
-                }
-            }
+        let todos = self.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
+        
+        if todos.isEmpty {
+            self.loadTodosFromNetwork()
+        } else {
+            self.output?.didFetchTodos(todos)
         }
     }
     
@@ -80,35 +76,26 @@ extension ToDoListInteractor: ToDoListInteractorInput {
     }
     
     func deleteTodoById(_ id: Int64) {
-        DispatchQueue.global(qos: .background).async {
-            self.dataStore.deleteTodo(id: id)
-            self.fetchTodos() // Reloading the task list after deletion
-        }
+        self.dataStore.deleteTodo(id: id)
+        self.fetchTodos()
     }
     
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
-        DispatchQueue.global(qos: .background).async {
-            self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
-            self.fetchTodos() // Reloading the task list after updating
-        }
+        self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
+        self.fetchTodos()
     }
     
     func toggleTodoStatus(by id: Int64) {
-        DispatchQueue.global(qos: .background).async {
-            if let todo = self.dataStore.fetchTodos().first(where: { $0.id == id }) {
-                let newStatus = !todo.completed
-                self.dataStore.updateTodo(id: id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
-                self.fetchTodos() // Reloading the task list after updating
-            }
+        if let todo = self.dataStore.fetchTodos().first(where: { $0.id == id }) {
+            let newStatus = !todo.completed
+            self.dataStore.updateTodo(id: id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
+            self.fetchTodos()
         }
     }
     
     func addTodo(task: String, completed: Bool, createdAt: Date) {
-        DispatchQueue.global(qos: .background).async {
-            let newId = (self.dataStore.fetchTodos().last?.id ?? 0) + 1
-            self.dataStore.saveTodo(id: newId, task: task, completed: completed, createdAt: createdAt)
-            self.fetchTodos() // Reloading the task list after adding
-        }
+        self.dataStore.addTodo(task: task, completed: completed, createdAt: createdAt)
+        self.fetchTodos()
     }
     
     func createNewTodo() {

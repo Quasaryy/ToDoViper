@@ -11,13 +11,14 @@
 protocol TodoDataStore {
     func saveTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
     func fetchTodos() -> [TodoEntity]
+    func addTodo(task: String, completed: Bool, createdAt: Date)
     func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
     func deleteTodo(id: Int64)
 }
 
 import CoreData
 
-struct PersistenceController {
+class PersistenceController {
     
     static let shared = PersistenceController()
     
@@ -70,6 +71,25 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+
+    }
+    
+    func performBackgroundTaskSync(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        let backgroundContext = container.newBackgroundContext()
+        backgroundContext.performAndWait {
+            block(backgroundContext)
+            do {
+                try backgroundContext.save()
+                
+                // Синхронизация изменений с основным контекстом
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .NSManagedObjectContextDidSave, object: backgroundContext)
+                }
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
     
 }
@@ -77,18 +97,12 @@ struct PersistenceController {
 extension PersistenceController: TodoDataStore {
     
     func saveTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
-        let context = container.viewContext
-        let newTodo = TodoEntity(context: context)
-        newTodo.id = id
-        newTodo.todo = task
-        newTodo.completed = completed
-        newTodo.createdAt = createdAt
-        
-        do {
-            try context.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        performBackgroundTaskSync { context in
+            let newTodo = TodoEntity(context: context)
+            newTodo.id = id
+            newTodo.todo = task
+            newTodo.completed = completed
+            newTodo.createdAt = createdAt
         }
     }
     
@@ -105,43 +119,55 @@ extension PersistenceController: TodoDataStore {
         }
     }
     
-    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
-        let context = container.viewContext
-        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
-        
-        do {
-            let todos = try context.fetch(fetchRequest)
-            if let todo = todos.first {
-                todo.todo = task
-                todo.completed = completed
-                todo.createdAt = createdAt
-                try context.save()
-            } else {
-                print("Todo with id \(id) not found.")
+    func addTodo(task: String, completed: Bool, createdAt: Date) {
+            performBackgroundTaskSync { context in
+                // Определяем новый ID как наибольший существующий ID + 1
+                let newId: Int64 = (self.fetchTodos().last?.id ?? 0) + 1
+                let newTodo = TodoEntity(context: context)
+                newTodo.id = newId
+                newTodo.todo = task
+                newTodo.completed = completed
+                newTodo.createdAt = createdAt
             }
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    
+    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
+        performBackgroundTaskSync { context in
+            let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
+            
+            do {
+                let todos = try context.fetch(fetchRequest)
+                if let todo = todos.first {
+                    todo.todo = task
+                    todo.completed = completed
+                    todo.createdAt = createdAt
+                } else {
+                    print("Todo with id \(id) not found.")
+                }
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }
     }
     
     func deleteTodo(id: Int64) {
-        let context = container.viewContext
-        let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
-        
-        do {
-            let todos = try context.fetch(fetchRequest)
-            if let todo = todos.first {
-                context.delete(todo)
-                try context.save()
-            } else {
-                print("Todo with id \(id) not found.")
+        performBackgroundTaskSync { context in
+            let fetchRequest: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %ld", id)
+            
+            do {
+                let todos = try context.fetch(fetchRequest)
+                if let todo = todos.first {
+                    context.delete(todo)
+                } else {
+                    print("Todo with id \(id) not found.")
+                }
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
     

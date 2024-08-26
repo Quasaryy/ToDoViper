@@ -43,7 +43,7 @@ final class ToDoListPresenter: ObservableObject {
     }
     
     func didTapTodoItem(_ id: Int64) {
-        print("tapped")
+        print("tapped \(id)")
     }
     
     func didTapStatusIcon(_ id: Int64) {
