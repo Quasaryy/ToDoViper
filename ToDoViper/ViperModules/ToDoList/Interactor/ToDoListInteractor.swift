@@ -16,7 +16,6 @@ protocol ToDoListInteractorInput {
     func deleteTodoById(_ id: Int64)
     func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
     func addTodo(task: String, completed: Bool, createdAt: Date)
-    func createNewTodo()
     func toggleTodoStatus(by id: Int64)
 }
 
@@ -109,13 +108,6 @@ extension ToDoListInteractor: ToDoListInteractorInput {
     func addTodo(task: String, completed: Bool, createdAt: Date) {
         self.dataStore.addTodo(task: task, completed: completed, createdAt: createdAt)
         self.fetchTodos()
-    }
-    
-    func createNewTodo() {
-        let newTask = "New Task"
-        let completed = false
-        let createdAt = Date()
-        addTodo(task: newTask, completed: completed, createdAt: createdAt)
     }
     
 }

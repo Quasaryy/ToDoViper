@@ -19,7 +19,7 @@ struct ToDoListView: View {
     @State private var isEditing: Bool = false
     @State private var editingTodoId: Int64? = nil
     @State private var isTaskCompleted: Bool = false
-    @State private var originalCreatedAt: Date? = nil // Сохраняем оригинальную дату создания задачи
+    @State private var originalCreatedAt: Date? = nil
     
     var body: some View {
         NavigationView {
@@ -55,7 +55,7 @@ struct ToDoListView: View {
                         .onTapGesture {
                             newTaskText = todo.todo ?? ""
                             isTaskCompleted = todo.completed
-                            originalCreatedAt = todo.createdAt // Сохраняем дату создания задачи
+                            originalCreatedAt = todo.createdAt
                             isEditing = true
                             editingTodoId = todo.id
                             isShowingAddEditTodoSheet = true
@@ -69,7 +69,7 @@ struct ToDoListView: View {
                     isEditing = false
                     editingTodoId = nil
                     isTaskCompleted = false
-                    originalCreatedAt = nil // Новый таск, без установленной даты
+                    originalCreatedAt = nil
                     isShowingAddEditTodoSheet = true
                 }) {
                     Image(systemName: "plus")
@@ -128,4 +128,5 @@ struct ToDoListView: View {
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
+    
 }

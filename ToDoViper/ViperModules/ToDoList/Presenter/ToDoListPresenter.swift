@@ -8,15 +8,12 @@
 // Any use, reproduction, or distribution of this code without prior written
 // permission from the copyright owner is strictly prohibited.
 
-protocol ToDoListViewInput: AnyObject {
-    func displayTodos(_ todos: [TodoEntity])
-    func displayError(_ error: Error)
-}
-
 protocol ToDoListPresenterInput: AnyObject {
     func loadTodos()
-    func didTapAddTodoButton()
-    func didTapTodoItem(_ id: Int64)
+    func didTapAddTodoButton(with: String)
+    func didTapStatusIcon(_ id: Int64)
+    func deleteTodoById(_ id: Int64)
+    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
 }
 
 import Foundation
@@ -24,24 +21,29 @@ import Combine
 
 final class ToDoListPresenter: ObservableObject {
     
+    // MARK: - Properties
+    
     @Published var todos: [TodoEntity] = []
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false
     
     private let interactor: ToDoListInteractorInput
-    weak var view: ToDoListViewInput?
+    
+    // MARK: - Initialization
     
     init(interactor: ToDoListInteractorInput) {
         self.interactor = interactor
     }
     
+}
+
+// MARK: - ToDoListPresenterInput
+
+extension ToDoListPresenter: ToDoListPresenterInput {
+    
     func loadTodos() {
         isLoading = true
         interactor.fetchTodos()
-    }
-    
-    func didTapAddTodoButton() {
-        interactor.createNewTodo()
     }
     
     func didTapAddTodoButton(with task: String) {
@@ -62,6 +64,8 @@ final class ToDoListPresenter: ObservableObject {
     }
     
 }
+
+// MARK: - ToDoListInteractorOutput
 
 extension ToDoListPresenter: ToDoListInteractorOutput {
     
