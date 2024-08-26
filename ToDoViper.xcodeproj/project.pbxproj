@@ -19,13 +19,13 @@
 		D29E8D3B2C78E456000FBCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3A2C78E456000FBCEC /* Assets.xcassets */; };
 		D29E8D3E2C78E456000FBCEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */; };
 		D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D3F2C78E456000FBCEC /* Persistence.swift */; };
-		D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */; };
 		D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */; };
 		D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D622C78F97E000FBCEC /* TodoModels.swift */; };
 		D29E8D652C790246000FBCEC /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D642C790246000FBCEC /* URLSessionProtocol.swift */; };
 		D29E8D672C79026A000FBCEC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D662C79026A000FBCEC /* NetworkManager.swift */; };
 		D29E8D6F2C7905B0000FBCEC /* ToDoViperUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */; };
 		D29E8D762C790600000FBCEC /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */; };
+		D2D0B48A2C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,6 @@
 		D29E8D3A2C78E456000FBCEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29E8D3D2C78E456000FBCEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D29E8D3F2C78E456000FBCEC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		D29E8D602C78F3E9000FBCEC /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 		D29E8D622C78F97E000FBCEC /* TodoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModels.swift; sourceTree = "<group>"; };
 		D29E8D642C790246000FBCEC /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		D29E8D6C2C7905B0000FBCEC /* ToDoViperUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoViperUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViperUnitTests.swift; sourceTree = "<group>"; };
 		D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +114,6 @@
 				D29E8D4E2C78E627000FBCEC /* Resources */,
 				D29E8D362C78E455000FBCEC /* ToDoViperApp.swift */,
 				D215A8DB2C79443B00525A07 /* ToDoViper.xcdatamodeld */,
-				D29E8D5E2C78E914000FBCEC /* PlaceholderView.swift */,
 				D29E8D3C2C78E456000FBCEC /* Preview Content */,
 			);
 			path = ToDoViper;
@@ -169,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				D29E8D502C78E6B4000FBCEC /* ToDoList */,
-				D29E8D572C78E7B1000FBCEC /* ToDoDetail */,
 			);
 			path = ViperModules;
 			sourceTree = "<group>";
@@ -208,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */,
+				D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -230,61 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				D21CDD4F2C7971BE00AE3A7F /* ToDoListAssembly.swift */,
-			);
-			path = Assembly;
-			sourceTree = "<group>";
-		};
-		D29E8D572C78E7B1000FBCEC /* ToDoDetail */ = {
-			isa = PBXGroup;
-			children = (
-				D29E8D582C78E7C0000FBCEC /* View */,
-				D29E8D592C78E7C4000FBCEC /* Interactor */,
-				D29E8D5A2C78E7D2000FBCEC /* Presenter */,
-				D29E8D5C2C78E7E1000FBCEC /* Entity */,
-				D29E8D5B2C78E7DD000FBCEC /* Router */,
-				D29E8D5D2C78E805000FBCEC /* Assembly */,
-			);
-			path = ToDoDetail;
-			sourceTree = "<group>";
-		};
-		D29E8D582C78E7C0000FBCEC /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		D29E8D592C78E7C4000FBCEC /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		D29E8D5A2C78E7D2000FBCEC /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		D29E8D5B2C78E7DD000FBCEC /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		D29E8D5C2C78E7E1000FBCEC /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		D29E8D5D2C78E805000FBCEC /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -403,13 +347,13 @@
 				D29D029F2C7923D0000DD149 /* NetworkManagerProtocol.swift in Sources */,
 				D29E8D402C78E456000FBCEC /* Persistence.swift in Sources */,
 				D215A8DD2C79443B00525A07 /* ToDoViper.xcdatamodeld in Sources */,
-				D29E8D5F2C78E914000FBCEC /* PlaceholderView.swift in Sources */,
 				D29E8D672C79026A000FBCEC /* NetworkManager.swift in Sources */,
 				D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */,
 				D299CBC22C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift in Sources */,
 				D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */,
 				D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */,
 				D27598E32C7CDD8200FA5307 /* AddAndEditTodoView.swift in Sources */,
+				D2D0B48A2C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift in Sources */,
 				D29E8D612C78F3E9000FBCEC /* ToDoListInteractor.swift in Sources */,
 				D21CDD4C2C79659D00AE3A7F /* ToDoListPresenter.swift in Sources */,
 				D29E8D372C78E455000FBCEC /* ToDoViperApp.swift in Sources */,
@@ -567,11 +511,12 @@
 				DEVELOPMENT_TEAM = H993X64HVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDoViper;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -596,11 +541,12 @@
 				DEVELOPMENT_TEAM = H993X64HVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDoViper;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

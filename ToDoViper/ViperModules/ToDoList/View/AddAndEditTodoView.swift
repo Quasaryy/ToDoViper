@@ -12,12 +12,22 @@ import SwiftUI
 
 struct AddAndEditTodoView: View {
     
+    // MARK: - Properties
+    
     @Binding var taskText: String
     var isEditing: Bool
+    var presenter: AddAndEditTodoPresenterInput
+    var originalTask: TodoEntity?
     var onSave: () -> Void
     var onCancel: () -> Void
     
+    // MARK: - UI
+    
     var body: some View {
+        makeUI()
+    }
+    
+    private func makeUI() -> some View {
         VStack {
             Text(isEditing ? "Edit Task" : "Add New Task")
                 .font(.headline)
@@ -38,6 +48,7 @@ struct AddAndEditTodoView: View {
                 Spacer()
                 
                 Button(isEditing ? "Save" : "Add") {
+                    presenter.saveTask(taskText: taskText, isEditing: isEditing, originalTask: originalTask)
                     onSave()
                 }
                 .padding()

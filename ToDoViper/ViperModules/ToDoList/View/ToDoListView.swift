@@ -106,17 +106,18 @@ struct ToDoListView: View {
             }
         }
         .sheet(isPresented: $isShowingAddEditTodoSheet) {
-            AddAndEditTodoView(taskText: $newTaskText, isEditing: isEditing) {
-                if isEditing, let id = editingTodoId, let createdAt = originalCreatedAt {
-                    presenter.updateTodo(id: id, task: newTaskText, completed: isTaskCompleted, createdAt: createdAt)
-                } else {
-                    presenter.didTapAddTodoButton(with: newTaskText)
+            AddAndEditTodoView(
+                taskText: $newTaskText,
+                isEditing: isEditing,
+                presenter: AddAndEditTodoPresenter(interactor: presenter.provideInteractor()),
+                originalTask: isEditing ? presenter.todos.first { $0.id == editingTodoId } : nil,
+                onSave: {
+                    isShowingAddEditTodoSheet = false
+                },
+                onCancel: {
+                    isShowingAddEditTodoSheet = false
                 }
-                newTaskText = ""
-                isShowingAddEditTodoSheet = false
-            } onCancel: {
-                isShowingAddEditTodoSheet = false
-            }
+            )
         }
         .onReceive(presenter.$errorMessage) { error in
             isShowingError = error != nil

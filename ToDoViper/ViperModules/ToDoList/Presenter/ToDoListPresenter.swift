@@ -35,6 +35,12 @@ final class ToDoListPresenter: ObservableObject {
         self.interactor = interactor
     }
     
+    // MARK: -  Methods
+    
+    func provideInteractor() -> ToDoListInteractorInput {
+        return interactor
+    }
+    
 }
 
 // MARK: - ToDoListPresenterInput
