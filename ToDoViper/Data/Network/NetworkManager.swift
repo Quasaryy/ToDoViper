@@ -15,15 +15,25 @@ enum NetworkError: Error {
     case noData
 }
 
-final class NetworkManager: NetworkManagerProtocol {
+final class NetworkManager {
+    
+    // MARK: - Properties
     
     private let session: URLSessionProtocol
     private let urlString: String
+    
+    // MARK: - Initialization
     
     init(session: URLSessionProtocol = URLSession.shared, urlString: String = "https://dummyjson.com/todos") {
         self.session = session
         self.urlString = urlString
     }
+    
+}
+
+// MARK: - NetworkManagerProtocol
+
+extension NetworkManager: NetworkManagerProtocol {
     
     func fetchTodos(completion: @escaping (Result<[Todo], Error>) -> Void) {
         guard let url = URL(string: urlString) else {
