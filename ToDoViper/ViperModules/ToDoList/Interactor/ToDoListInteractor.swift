@@ -36,38 +36,43 @@ final class ToDoListInteractor {
         self.networkManager = networkManager
     }
     
+    private func sortTodos(_ todos: [TodoEntity]) -> [TodoEntity] {
+            return todos.sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
+        }
+    
 }
 
 extension ToDoListInteractor: ToDoListInteractorInput {
     
     func fetchTodos() {
-        let todos = self.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }
-        
-        if todos.isEmpty {
-            self.loadTodosFromNetwork()
-        } else {
-            self.output?.didFetchTodos(todos)
+            let todos = self.dataStore.fetchTodos()
+            let sortedTodos = sortTodos(todos)
+            
+            if sortedTodos.isEmpty {
+                self.loadTodosFromNetwork()
+            } else {
+                self.output?.didFetchTodos(sortedTodos)
+            }
         }
-    }
     
     private func loadTodosFromNetwork() {
-        networkManager.fetchTodos { [weak self] result in
-            switch result {
-            case .success(let todos):
-                DispatchQueue.global(qos: .background).async {
-                    self?.saveTodosToCoreData(todos)
-                    let savedTodos = self?.dataStore.fetchTodos().sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() } ?? []
-                    DispatchQueue.main.async {
-                        self?.output?.didFetchTodos(savedTodos)
+            networkManager.fetchTodos { [weak self] result in
+                switch result {
+                case .success(let todos):
+                    DispatchQueue.global(qos: .background).async {
+                        self?.saveTodosToCoreData(todos)
+                        let savedTodos = self?.sortTodos(self?.dataStore.fetchTodos() ?? [])
+                        DispatchQueue.main.async {
+                            self?.output?.didFetchTodos(savedTodos ?? [])
+                        }
                     }
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.output?.didFailToFetchTodos(with: error)
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.output?.didFailToFetchTodos(with: error)
+                    }
                 }
             }
         }
-    }
     
     private func saveTodosToCoreData(_ todos: [Todo]) {
         for todo in todos {

@@ -14,6 +14,12 @@ struct ToDoListView: View {
     
     @ObservedObject var presenter: ToDoListPresenter
     @State private var isShowingError: Bool = false
+    @State private var isShowingAddEditTodoSheet: Bool = false
+    @State private var newTaskText: String = ""
+    @State private var isEditing: Bool = false
+    @State private var editingTodoId: Int64? = nil
+    @State private var isTaskCompleted: Bool = false
+    @State private var originalCreatedAt: Date? = nil // Сохраняем оригинальную дату создания задачи
     
     var body: some View {
         NavigationView {
@@ -47,14 +53,24 @@ struct ToDoListView: View {
                             }
                         }
                         .onTapGesture {
-                            presenter.didTapTodoItem(todo.id)
+                            newTaskText = todo.todo ?? ""
+                            isTaskCompleted = todo.completed
+                            originalCreatedAt = todo.createdAt // Сохраняем дату создания задачи
+                            isEditing = true
+                            editingTodoId = todo.id
+                            isShowingAddEditTodoSheet = true
                         }
                     }
                     .onDelete(perform: deleteTask)
                 }
                 .navigationTitle("To-Do List")
                 .navigationBarItems(trailing: Button(action: {
-                    presenter.didTapAddTodoButton()
+                    newTaskText = ""
+                    isEditing = false
+                    editingTodoId = nil
+                    isTaskCompleted = false
+                    originalCreatedAt = nil // Новый таск, без установленной даты
+                    isShowingAddEditTodoSheet = true
                 }) {
                     Image(systemName: "plus")
                 })
@@ -67,6 +83,32 @@ struct ToDoListView: View {
         }
         .alert(isPresented: $isShowingError) {
             Alert(title: Text("Error"), message: Text(presenter.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
+        }
+        .onChange(of: isShowingAddEditTodoSheet) { showing in
+            if showing {
+                if isEditing, let id = editingTodoId {
+                    newTaskText = presenter.todos.first(where: { $0.id == id })?.todo ?? ""
+                    isTaskCompleted = presenter.todos.first(where: { $0.id == id })?.completed ?? false
+                    originalCreatedAt = presenter.todos.first(where: { $0.id == id })?.createdAt
+                } else {
+                    newTaskText = ""
+                    isTaskCompleted = false
+                    originalCreatedAt = nil
+                }
+            }
+        }
+        .sheet(isPresented: $isShowingAddEditTodoSheet) {
+            AddAndEditTodoView(taskText: $newTaskText, isEditing: isEditing) {
+                if isEditing, let id = editingTodoId, let createdAt = originalCreatedAt {
+                    presenter.updateTodo(id: id, task: newTaskText, completed: isTaskCompleted, createdAt: createdAt)
+                } else {
+                    presenter.didTapAddTodoButton(with: newTaskText)
+                }
+                newTaskText = ""
+                isShowingAddEditTodoSheet = false
+            } onCancel: {
+                isShowingAddEditTodoSheet = false
+            }
         }
         .onReceive(presenter.$errorMessage) { error in
             isShowingError = error != nil
@@ -86,5 +128,4 @@ struct ToDoListView: View {
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
-    
 }

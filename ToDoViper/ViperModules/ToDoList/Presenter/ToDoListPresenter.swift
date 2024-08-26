@@ -44,16 +44,21 @@ final class ToDoListPresenter: ObservableObject {
         interactor.createNewTodo()
     }
     
-    func didTapTodoItem(_ id: Int64) {
-        print("tapped \(id)")
+    func didTapAddTodoButton(with task: String) {
+        interactor.addTodo(task: task, completed: false, createdAt: Date())
     }
     
     func didTapStatusIcon(_ id: Int64) {
+        print("tapped \(id)")
         interactor.toggleTodoStatus(by: id)
     }
     
     func deleteTodoById(_ id: Int64) {
         interactor.deleteTodoById(id)
+    }
+    
+    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
+        interactor.updateTodoById(id, task: task, completed: completed, createdAt: createdAt)
     }
     
 }
