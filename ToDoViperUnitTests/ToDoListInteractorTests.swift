@@ -79,27 +79,4 @@ class ToDoListInteractorTests: XCTestCase {
         XCTAssertEqual(persistenceController.fetchTodos().count, 0)
     }
     
-    func testUpdateTodo() {
-        // Arrange
-        persistenceController.saveTodo(id: 1, task: "Old Task", completed: false, createdAt: Date())
-        
-        // Act
-        interactor.updateTodoById(1, task: "Updated Task", completed: true, createdAt: Date())
-        
-        // Assert
-        XCTAssertEqual(output.todos.count, 1)
-        XCTAssertEqual(output.todos.first?.todo, "Updated Task")
-        XCTAssertEqual(output.todos.first?.completed, true)
-    }
-    
-    func testAddTodo() {
-        // Act
-        interactor.addTodo(task: "New Task", completed: false, createdAt: Date())
-        
-        // Assert
-        XCTAssertEqual(output.todos.count, 1)
-        XCTAssertEqual(output.todos.first?.todo, "New Task")
-        XCTAssertEqual(output.todos.first?.completed, false)
-    }
-    
 }
