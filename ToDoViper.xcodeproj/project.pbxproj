@@ -27,6 +27,7 @@
 		D29E8D762C790600000FBCEC /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */; };
 		D2D0B48A2C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */; };
 		D2D0B48C2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B48B2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift */; };
+		D2D0B4962C7D5533000FAE2B /* AddAndEditTodoInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B4952C7D5533000FAE2B /* AddAndEditTodoInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoPresenter.swift; sourceTree = "<group>"; };
 		D2D0B48B2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoInteractor.swift; sourceTree = "<group>"; };
+		D2D0B4952C7D5533000FAE2B /* AddAndEditTodoInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */,
 				D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */,
 				D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */,
+				D2D0B4952C7D5533000FAE2B /* AddAndEditTodoInteractorTests.swift */,
 			);
 			path = ToDoViperUnitTests;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D0B4962C7D5533000FAE2B /* AddAndEditTodoInteractorTests.swift in Sources */,
 				D29E8D762C790600000FBCEC /* NetworkManagerTests.swift in Sources */,
 				D29D029D2C792290000DD149 /* ToDoListInteractorTests.swift in Sources */,
 				D29E8D6F2C7905B0000FBCEC /* ToDoViperUnitTests.swift in Sources */,
