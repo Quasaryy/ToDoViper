@@ -69,7 +69,7 @@ struct ToDoListView: View {
                             isShowingAddEditTodoSheet = true
                         }
                     }
-                    .onDelete(perform: deleteTask)
+                    .onDelete(perform: presenter.handleDelete)
                 }
                 .navigationTitle("To-Do List")
                 .navigationBarItems(trailing: Button(action: {
@@ -106,13 +106,16 @@ struct ToDoListView: View {
             }
         }
         .sheet(isPresented: $isShowingAddEditTodoSheet) {
+            let addEditInteractor = AddAndEditTodoInteractor(dataStore: PersistenceController.shared)
+            let addEditPresenter = AddAndEditTodoPresenter(interactor: addEditInteractor)
             AddAndEditTodoView(
                 taskText: $newTaskText,
                 isEditing: isEditing,
-                presenter: AddAndEditTodoPresenter(interactor: presenter.provideInteractor()),
+                presenter: addEditPresenter,
                 originalTask: isEditing ? presenter.todos.first { $0.id == editingTodoId } : nil,
                 onSave: {
                     isShowingAddEditTodoSheet = false
+                    presenter.loadTodos()
                 },
                 onCancel: {
                     isShowingAddEditTodoSheet = false
@@ -121,15 +124,6 @@ struct ToDoListView: View {
         }
         .onReceive(presenter.$errorMessage) { error in
             isShowingError = error != nil
-        }
-    }
-    
-    // MARK: - Private Methods
-    
-    private func deleteTask(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let todo = presenter.todos[index]
-            presenter.deleteTodoById(todo.id)
         }
     }
     

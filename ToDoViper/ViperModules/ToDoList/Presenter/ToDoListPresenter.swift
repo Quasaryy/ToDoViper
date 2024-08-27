@@ -10,10 +10,9 @@
 
 protocol ToDoListPresenterInput: AnyObject {
     func loadTodos()
-    func didTapAddTodoButton(with: String)
     func didTapStatusIcon(_ id: Int64)
     func deleteTodoById(_ id: Int64)
-    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date)
+    func handleDelete(at: IndexSet)
 }
 
 import Foundation
@@ -28,17 +27,12 @@ final class ToDoListPresenter: ObservableObject {
     @Published var isLoading: Bool = false
     
     private let interactor: ToDoListInteractorInput
+    var onPresentAddEditTodoView: ((String, Bool, TodoEntity?) -> Void)?
     
     // MARK: - Initialization
     
     init(interactor: ToDoListInteractorInput) {
         self.interactor = interactor
-    }
-    
-    // MARK: -  Methods
-    
-    func provideInteractor() -> ToDoListInteractorInput {
-        return interactor
     }
     
 }
@@ -52,10 +46,6 @@ extension ToDoListPresenter: ToDoListPresenterInput {
         interactor.fetchTodos()
     }
     
-    func didTapAddTodoButton(with task: String) {
-        interactor.addTodo(task: task, completed: false, createdAt: Date())
-    }
-    
     func didTapStatusIcon(_ id: Int64) {
         print("tapped \(id)")
         interactor.toggleTodoStatus(by: id)
@@ -65,8 +55,11 @@ extension ToDoListPresenter: ToDoListPresenterInput {
         interactor.deleteTodoById(id)
     }
     
-    func updateTodo(id: Int64, task: String, completed: Bool, createdAt: Date) {
-        interactor.updateTodoById(id, task: task, completed: completed, createdAt: createdAt)
+    func handleDelete(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let todo = todos[index]
+            deleteTodoById(todo.id)
+        }
     }
     
 }

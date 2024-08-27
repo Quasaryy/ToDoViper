@@ -26,6 +26,7 @@
 		D29E8D6F2C7905B0000FBCEC /* ToDoViperUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */; };
 		D29E8D762C790600000FBCEC /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */; };
 		D2D0B48A2C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */; };
+		D2D0B48C2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0B48B2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		D29E8D6E2C7905B0000FBCEC /* ToDoViperUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViperUnitTests.swift; sourceTree = "<group>"; };
 		D29E8D752C790600000FBCEC /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoPresenter.swift; sourceTree = "<group>"; };
+		D2D0B48B2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditTodoInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D29E8D502C78E6B4000FBCEC /* ToDoList */,
+				D2D0B48D2C7D4EF9000FAE2B /* AddAndEditTodo */,
 			);
 			path = ViperModules;
 			sourceTree = "<group>";
@@ -189,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				D21CDD4D2C796FAA00AE3A7F /* ToDoListView.swift */,
-				D27598E22C7CDD8200FA5307 /* AddAndEditTodoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				D21CDD4B2C79659D00AE3A7F /* ToDoListPresenter.swift */,
-				D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -241,6 +242,56 @@
 				D29D029C2C792290000DD149 /* ToDoListInteractorTests.swift */,
 			);
 			path = ToDoViperUnitTests;
+			sourceTree = "<group>";
+		};
+		D2D0B48D2C7D4EF9000FAE2B /* AddAndEditTodo */ = {
+			isa = PBXGroup;
+			children = (
+				D2D0B48E2C7D4F1E000FAE2B /* View */,
+				D2D0B48F2C7D4F3B000FAE2B /* Interactor */,
+				D2D0B4902C7D4F4C000FAE2B /* Presenter */,
+				D2D0B4912C7D4F5A000FAE2B /* Entity */,
+				D2D0B4922C7D4F66000FAE2B /* Router */,
+			);
+			path = AddAndEditTodo;
+			sourceTree = "<group>";
+		};
+		D2D0B48E2C7D4F1E000FAE2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D27598E22C7CDD8200FA5307 /* AddAndEditTodoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2D0B48F2C7D4F3B000FAE2B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				D2D0B48B2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D2D0B4902C7D4F4C000FAE2B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D2D0B4892C7D35FA000FAE2B /* AddAndEditTodoPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D2D0B4912C7D4F5A000FAE2B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		D2D0B4922C7D4F66000FAE2B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +400,7 @@
 				D215A8DD2C79443B00525A07 /* ToDoViper.xcdatamodeld in Sources */,
 				D29E8D672C79026A000FBCEC /* NetworkManager.swift in Sources */,
 				D29E8D632C78F97E000FBCEC /* TodoModels.swift in Sources */,
+				D2D0B48C2C7D430E000FAE2B /* AddAndEditTodoInteractor.swift in Sources */,
 				D299CBC22C7CC6FD009FAFC6 /* CustomCircularProgressViewStyle.swift in Sources */,
 				D21CDD502C7971BE00AE3A7F /* ToDoListAssembly.swift in Sources */,
 				D21CDD4E2C796FAA00AE3A7F /* ToDoListView.swift in Sources */,

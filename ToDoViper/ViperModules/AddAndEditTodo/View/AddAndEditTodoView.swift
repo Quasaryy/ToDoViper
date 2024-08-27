@@ -32,21 +32,17 @@ struct AddAndEditTodoView: View {
             Text(isEditing ? "Edit Task" : "Add New Task")
                 .font(.headline)
                 .padding()
-            
             TextField(isEditing ? "Edit task title" : "Enter task title", text: $taskText)
                 .padding()
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(8)
                 .padding(.horizontal)
-            
             HStack {
                 Button("Cancel") {
                     onCancel()
                 }
                 .padding()
-                
                 Spacer()
-                
                 Button(isEditing ? "Save" : "Add") {
                     presenter.saveTask(taskText: taskText, isEditing: isEditing, originalTask: originalTask)
                     onSave()

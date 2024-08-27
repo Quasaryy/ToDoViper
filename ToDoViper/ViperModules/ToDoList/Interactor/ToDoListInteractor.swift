@@ -14,8 +14,6 @@ import CoreData
 protocol ToDoListInteractorInput {
     func fetchTodos()
     func deleteTodoById(_ id: Int64)
-    func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date)
-    func addTodo(task: String, completed: Bool, createdAt: Date)
     func toggleTodoStatus(by id: Int64)
 }
 
@@ -92,22 +90,12 @@ extension ToDoListInteractor: ToDoListInteractorInput {
         self.fetchTodos()
     }
     
-    func updateTodoById(_ id: Int64, task: String, completed: Bool, createdAt: Date) {
-        self.dataStore.updateTodo(id: id, task: task, completed: completed, createdAt: createdAt)
-        self.fetchTodos()
-    }
-    
     func toggleTodoStatus(by id: Int64) {
         if let todo = self.dataStore.fetchTodos().first(where: { $0.id == id }) {
             let newStatus = !todo.completed
             self.dataStore.updateTodo(id: id, task: todo.todo ?? "", completed: newStatus, createdAt: todo.createdAt ?? Date())
             self.fetchTodos()
         }
-    }
-    
-    func addTodo(task: String, completed: Bool, createdAt: Date) {
-        self.dataStore.addTodo(task: task, completed: completed, createdAt: createdAt)
-        self.fetchTodos()
     }
     
 }

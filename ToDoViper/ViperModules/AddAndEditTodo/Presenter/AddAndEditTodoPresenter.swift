@@ -8,21 +8,21 @@
 // Any use, reproduction, or distribution of this code without prior written
 // permission from the copyright owner is strictly prohibited.
 
+import Foundation
+
 protocol AddAndEditTodoPresenterInput: AnyObject {
     func saveTask(taskText: String, isEditing: Bool, originalTask: TodoEntity?)
 }
-
-import Foundation
 
 final class AddAndEditTodoPresenter {
     
     // MARK: - Properties
     
-    private let interactor: ToDoListInteractorInput
+    private let interactor: AddAndEditTodoInteractorInput
     
     // MARK: - Initialization
     
-    init(interactor: ToDoListInteractorInput) {
+    init(interactor: AddAndEditTodoInteractorInput) {
         self.interactor = interactor
     }
 }
