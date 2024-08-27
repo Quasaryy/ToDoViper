@@ -55,6 +55,27 @@ class ToDoListInteractorTests: XCTestCase {
         interactor.output = output
     }
     
+    func testFetchTodosFromNetwork() {
+        // Arrange
+        networkManager.todos = [Todo(id: 1, todo: "Network Task", completed: false)]
+        persistenceController.saveTodo(id: 1, task: "Local Task", completed: false, createdAt: Date())
+        persistenceController.deleteTodo(id: 1)
+        
+        // Act
+        let expectation = XCTestExpectation(description: "Fetch todos from network")
+        interactor.fetchTodos()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Assert
+            XCTAssertEqual(self.output.todos.count, 1)
+            XCTAssertEqual(self.output.todos.first?.todo, "Network Task")
+            XCTAssertEqual(self.output.todos.first?.completed, false)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2.0)
+    }
+    
     func testFetchTodosFromCoreData() {
         // Arrange
         persistenceController.saveTodo(id: 1, task: "Test Task", completed: false, createdAt: Date())
@@ -77,6 +98,24 @@ class ToDoListInteractorTests: XCTestCase {
         // Assert
         XCTAssertEqual(output.todos.count, 0)
         XCTAssertEqual(persistenceController.fetchTodos().count, 0)
+    }
+    
+    func testToggleTodoStatus() {
+        // Arrange
+        persistenceController.saveTodo(id: 1, task: "Task to Toggle", completed: false, createdAt: Date())
+        
+        // Act
+        let expectation = XCTestExpectation(description: "Status toggled")
+        interactor.toggleTodoStatus(by: 1)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Assert
+            let updatedTask = self.persistenceController.fetchTodos().first { $0.id == 1 }
+            XCTAssertEqual(updatedTask?.completed, true)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2.0)
     }
     
 }
